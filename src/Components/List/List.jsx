@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import Hr from '../Hr/Hr'
-import Main from '../Main/Main'
+import Main from '../Main/MainContent'
 import './List.scss'
 
 
