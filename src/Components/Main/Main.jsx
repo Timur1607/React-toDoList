@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import './Main.scss'
 import Point from '../Point/Point'
 
@@ -24,40 +24,52 @@ export default function Main(props){
     }, [props.check])
     
     function deletingPoint(point){
-        let Data = (localStorage.getItem('toDoList') !== null ? JSON.parse(localStorage.toDoList) : [])
-        let newData = []
-        for(let i = 0; i < Data.length; i++){
-            if(i != point.getAttribute('id')){
-                newData.push(Data[i])
-            }
-        }
+        let storedData = JSON.parse(localStorage.getItem('toDoList') || '[]')
+        let newData = storedData.filter((_, index) => index != point)
         localStorage.setItem("toDoList", JSON.stringify(newData))
-        props.setData(localStorage.getItem('toDoList') !== null ? JSON.parse(localStorage.toDoList) : [])
+        props.setData(newData)
+        
         if(newData.length === 0){
             props.setMainStyle('main')
             props.setFooterStyle('footer')
         }
     }
-    function addMark(el){
-        let Data = (localStorage.getItem('toDoList') !== null ? JSON.parse(localStorage.toDoList) : [])
-        for(let i = 0; i < Data.length; i++){
-            if(i == el.target.parentElement.parentElement.getAttribute('id')){
-                Data[i].mark = el.target.checked
-            }
-        }
-        localStorage.setItem("toDoList", JSON.stringify(Data))
-        props.setData(localStorage.getItem('toDoList') !== null ? JSON.parse(localStorage.toDoList) : [])
-        console.log(Data);
+    
+    function addMark(event, id) {
+        let storedData = JSON.parse(localStorage.getItem('toDoList') || '[]');
+        storedData[id].mark = event.target.checked;
+        
+        localStorage.setItem('toDoList', JSON.stringify(storedData));
+        props.setData([...storedData]);
     }
+
+    function change(el){
+        console.log(el);
+        el.children[1].classList.toggle('point__forLeft_input-script')
+        el.children[0].children[1].classList.toggle('point__text-script')
+        console.log(el.children[1].getAttribute('class').split(' ').length);
+        if(el.children[1].getAttribute('class').split(' ').length === 2){
+            el.children[2].children[0].textContent = '✅'
+        } else if(el.children[1].getAttribute('class').split(' ').length === 1){
+            el.children[2].children[0].textContent = '✏️'
+
+            let storedData = JSON.parse(localStorage.getItem('toDoList') || '[]')
+            storedData[el.getAttribute('id')].value = el.children[1].value
+            localStorage.setItem('toDoList', JSON.stringify(storedData));
+            props.setData(JSON.parse(localStorage.getItem('toDoList') || '[]'))
+        }
+    }
+
     useEffect(()=>{
-        props.setData(localStorage.getItem('toDoList') !== null ? JSON.parse(localStorage.toDoList) : [])
+        // props.setData(localStorage.getItem('toDoList') !== null ? JSON.parse(localStorage.toDoList) : [])
+        props.setData(JSON.parse(localStorage.getItem('toDoList') || '[]'))
     }, [props.deleteMarkedStatus])
 
     return(
         <>
             <main className={props.style}>
                 {props.data.map((el, i) => (
-                    <Point key={i} el={el} delete={deletingPoint} id={i} addMark={addMark}/>
+                    <Point key={i} el={el} delete={()=>deletingPoint(i)} id={i} addMark={addMark} change={change}/>
                 ))}
             </main>
         </>

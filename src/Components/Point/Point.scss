@@ -1,15 +1,15 @@
 .point{
-    height: 21px;
+    height: 38px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 26px;
+    margin-bottom: 13px;
 
     &__checkbox{
-        margin-right: 16px;
+        // margin-right: 16px;
         width: 16px;
         height: 16px;
-        margin-top: 3px;
+        // margin-top: 3px;
         cursor: pointer;
         accent-color: #6B3FA0;
     }
@@ -29,6 +29,40 @@
     &__forLeft{
         display: flex;
         flex-direction: row;
+        align-items: center;
+        gap: 16px;
+
+        &_input{
+            display: none;
+            max-width: 450px;
+            width: 100%;
+            height: 38px;
+            border-radius: 4px;
+            border: 1px solid var(--Stroke-Input, #CED4DA);
+            background: var(---Gray-White, #FFF);
+            color: var(--Secondary-Dark-Color, #54595E);
+            font-family: "Inter";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 21px;
+            padding: 9px 32px 8px 13px;
+
+            &-script{
+                display: block;
+            }
+        }
+    }
+    &__forRight{
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        align-items: center;
+
+        &_rewrite{
+            margin-bottom: 2px;
+            cursor: pointer;
+        }
     }
     &__text{
         margin-right: 38px;
@@ -38,6 +72,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 21px; /* 131.25% */
+
+        &-script{
+            display: none;
+        }
 
         &_decoration{
             text-decoration-line: line-through;
