@@ -1,0 +1,13 @@
+.hr{
+    width: 594px;
+    height: 1px;
+    background: #DEE2E6;
+    border: none;
+}
+
+@media screen and (max-width: 594px){
+    .hr{
+        max-width: 594px;
+        width: 100%;
+    }
+}

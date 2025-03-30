@@ -1,0 +1,66 @@
+.footer{
+    padding: 18px 24px;
+    border-radius: 0px 0px 16px 16px;
+    background: #F5F5F5;
+    display: none;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .btn1{
+        display: flex;
+        padding: 10px 16px;
+        align-items: center;
+        border-radius: 4px;
+        background: var(--Secondary-color, #6C757D);
+        color: var(---Gray-White, #FFF);
+        text-align: center;
+        font-family: 'Inter';
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        border: 2px solid #6C757D;
+        cursor: pointer;
+        transition: 0.5s;
+
+        &:active{
+            background-color: #fff;
+            color: #6C757D;
+        }
+        
+    }
+
+    .deleteAll{
+        display: flex;
+        padding: 10px 16px;
+        align-items: center;
+        border-radius: 4px;
+        background: var(---Status-Color-Danger, #DC3545);
+        color: var(---Gray-White, #FFF);
+        text-align: center;
+        font-family: 'Inter';
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal; 
+        border: 2px solid #DC3545;  
+        cursor: pointer;
+        transition: 0.5s;
+
+        &:active{
+            background-color: #fff;
+            color: #DC3545;
+        }
+    }
+
+    &__script{
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 425px){
+    .footer{
+        flex-direction: column;
+        gap: 15px;
+    }
+}
